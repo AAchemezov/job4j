@@ -11,7 +11,7 @@ public class Calculate {
 	* Method Main Точка входа в приложение. Выводит в консоль "Hellow World"
 	* @param args Массив строковых параметров. 
 	*/
-	public static void main (String[] args){
+	public static void main(String[] args) {
 		System.out.println("Hello World");
 	}
 	
