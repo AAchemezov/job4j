@@ -7,12 +7,11 @@ package ru.job4j.converter;
  * @since 18.02.2019
  */
 public class Converter {
-    /**
-     * Курс рубль-доллар
-     */
+
+    /** Курс рубль-доллар. */
     static int dollar = 60;
     /**
-     * Курс рубль-евро
+     * Курс рубль-евро.
      */
     static int euro = 70;
 
