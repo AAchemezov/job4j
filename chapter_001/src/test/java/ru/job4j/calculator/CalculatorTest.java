@@ -6,7 +6,17 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тестирование класса Calculator.
+ * @author Andrey Chemezov
+ * @version $Id$
+ * @since 0.1
+ */
 public class CalculatorTest {
+
+    /**
+     * Test: 1 + 1 = 2.
+     */
     @Test
     public void whenAddOnePlusOneThenTwo() {
         Calculator calc = new Calculator();
@@ -16,6 +26,9 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Test: 2 - 2 = 0.
+     */
     @Test
     public void whenSubtract2of2Then0() {
         Calculator calc = new Calculator();
@@ -25,6 +38,9 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Test: 4 / 2 = 2.
+     */
     @Test
     public void whenDiv4On2Then1() {
         Calculator calc = new Calculator();
@@ -34,6 +50,9 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Test: 2 * 2 = 4.
+     */
     @Test
     public void whenMultiple2On2Then4() {
         Calculator calc = new Calculator();
