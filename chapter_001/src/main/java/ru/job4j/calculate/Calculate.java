@@ -8,7 +8,7 @@ package ru.job4j.calculate;
 public class Calculate {
 	
 	/**
-	* Method Main Точка входа в приложение. Выводит в консоль "Hellow World"
+	* Method Main Точка входа в приложение. Выводит в консоль "Hello World"
 	* @param args Массив строковых параметров. 
 	*/
 	public static void main(String[] args) {
