@@ -9,11 +9,11 @@ package ru.job4j.converter;
 public class Converter {
 
     /** Курс рубль-доллар. */
-    static int dollar = 60;
+    static final int DOLLAR = 60;
     /**
      * Курс рубль-евро.
      */
-    static int euro = 70;
+    static final int EURO = 70;
 
     /**
      * Конвертируем рубли в евро.
@@ -22,7 +22,7 @@ public class Converter {
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        return value / euro;
+        return value / EURO;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Converter {
      * @return Доллары
      */
     public int rubleToDollar(int value) {
-        return value / dollar;
+        return value / DOLLAR;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Converter {
      * @return рубли.
      */
     public int euroToRuble(int value) {
-        return value * euro;
+        return value * EURO;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Converter {
      * @return рубли
      */
     public int dollarToRuble(int value) {
-        return value * dollar;
+        return value * DOLLAR;
     }
 }
 
