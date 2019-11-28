@@ -2,7 +2,19 @@
    <modelVersion>4.0.0</modelVersion>
    <artifactId>chapter_001</artifactId>
    <version>2.0</version>
-   <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>jar</packaging>
    <parent>
        <groupId>ru.job4j</groupId>
        <artifactId>junior</artifactId>
