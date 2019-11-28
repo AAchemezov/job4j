@@ -23,24 +23,18 @@ public class Converter {
 
             @Override
             public boolean hasNext() {
-                if (next != null && next.hasNext()) {
-                    return true;
-                }
-                while (it.hasNext()) {
+                while ((next == null || !next.hasNext()) && it.hasNext()) {
                     next = it.next();
-                    if (next.hasNext()) {
-                        return true;
-                    }
                 }
-                return false;
+                return next != null && next.hasNext();
             }
 
             @Override
             public Integer next() {
-                if (hasNext()) {
-                    return next.next();
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
                 }
-                throw new NoSuchElementException();
+                return next.next();
             }
         };
     }
