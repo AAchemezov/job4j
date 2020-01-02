@@ -28,25 +28,25 @@ public class SimpleArrayTest {
         assertThat(stringSimpleArray.getSize(), is(3));
         assertThat(stringSimpleArray.isEmpty(), is(false));
 
-        assertThat(stringSimpleArray.get(0), is(equalTo("zero")));
-        assertThat(stringSimpleArray.get(1), is(equalTo("one")));
-        assertThat(stringSimpleArray.get(2), is(equalTo("two")));
+        assertThat(stringSimpleArray.get(0), equalTo("zero"));
+        assertThat(stringSimpleArray.get(1), equalTo("one"));
+        assertThat(stringSimpleArray.get(2), equalTo("two"));
         assertThat(stringSimpleArray.getSize(), is(3));
         assertThat(stringSimpleArray.isEmpty(), is(false));
 
         stringSimpleArray.set(1, "first");
-        assertThat(stringSimpleArray.get(1), is(equalTo("first")));
+        assertThat(stringSimpleArray.get(1), equalTo("first"));
         assertThat(stringSimpleArray.getSize(), is(3));
         assertThat(stringSimpleArray.isEmpty(), is(false));
 
-        assertThat(stringSimpleArray.remove(1), is(equalTo("first")));
-        assertThat(stringSimpleArray.get(0), is(equalTo("zero")));
-        assertThat(stringSimpleArray.get(1), is(equalTo("two")));
+        assertThat(stringSimpleArray.remove(1), equalTo("first"));
+        assertThat(stringSimpleArray.get(0), equalTo("zero"));
+        assertThat(stringSimpleArray.get(1), equalTo("two"));
         assertThat(stringSimpleArray.getSize(), is(2));
         assertThat(stringSimpleArray.isEmpty(), is(false));
 
-        assertThat(stringSimpleArray.remove(1), is(equalTo("two")));
-        assertThat(stringSimpleArray.remove(0), is(equalTo("zero")));
+        assertThat(stringSimpleArray.remove(1), equalTo("two"));
+        assertThat(stringSimpleArray.remove(0), equalTo("zero"));
         assertThat(stringSimpleArray.getSize(), is(0));
         assertThat(stringSimpleArray.isEmpty(), is(true));
     }

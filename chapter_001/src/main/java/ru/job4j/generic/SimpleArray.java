@@ -57,10 +57,9 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     public T remove(int index) {
         checkIndexLimit(index);
-        size--;
         Object rem = objects[index];
-        for (int i = index; i < size; i++) {
-            objects[i] = objects[i + 1];
+        if (index < --size) {
+            System.arraycopy(objects, index + 1, objects, index, size - index);
         }
         objects[size] = null;
         return (T) rem;
