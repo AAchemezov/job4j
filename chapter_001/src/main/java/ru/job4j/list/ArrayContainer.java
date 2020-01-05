@@ -21,11 +21,11 @@ public class ArrayContainer<E> implements ISimpleContainer<E> {
     private int modCount = 0;
     private Object[] values;
 
-    ArrayContainer() {
+    public ArrayContainer() {
         this(DEFAULT_CAPACITY);
     }
 
-    ArrayContainer(int capacity) {
+    public ArrayContainer(int capacity) {
         checkNegativeCapacity(capacity);
         this.capacity = capacity;
         values = new Object[capacity];
