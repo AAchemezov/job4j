@@ -70,4 +70,32 @@ public class NodeTest {
     public void basicFunctionalityTest6() {
         assertThat(Node.hasCycle(null), is(false));
     }
+
+    @Test
+    public void basicFunctionalityTest7() {
+        Node<Integer> first = new Node<>(1);
+        Node<Integer> start = first;
+        Node<Integer> end = first;
+        for (int i = 0; i < 100000; i++) {
+            end = new Node<>(i);
+            start.next = end;
+            start = end;
+        }
+        end.next = first;
+
+        long st, en;
+        for (int i = 0; i < 10; i++) {
+
+            st = System.nanoTime();
+            Node.hasCycleMy(first);
+            en = System.nanoTime();
+            System.out.println("hasCycleMy:" + (en - st));
+
+            st = System.nanoTime();
+            Node.hasCycle(first);
+            en = System.nanoTime();
+            System.out.println("hasCycle:  " + (en - st));
+        }
+
+    }
 }
