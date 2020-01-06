@@ -6,14 +6,14 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SimpleArrayListTest {
+public class SimpleLinkedListTest {
 
-    private SimpleArrayList<Integer> list, emptyList;
+    private SimpleLinkedList<Integer> list, emptyList;
 
     @Before
     public void beforeTest() {
-        emptyList = new SimpleArrayList<>();
-        list = new SimpleArrayList<>();
+        emptyList = new SimpleLinkedList<>();
+        list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);

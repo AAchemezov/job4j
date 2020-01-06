@@ -2,7 +2,7 @@ package ru.job4j.list;
 
 public class StackOnLinkedContainer<E> implements ISimpleStack<E> {
 
-    private SimpleArrayList<E> container = new SimpleArrayList<>();
+    private SimpleLinkedList<E> container = new SimpleLinkedList<>();
 
     @Override
     public E poll() {

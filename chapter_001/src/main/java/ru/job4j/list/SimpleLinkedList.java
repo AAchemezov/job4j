@@ -1,15 +1,15 @@
 package ru.job4j.list;
 
 /**
- * Класс SimpleArrayList.
+ * Класс реализации односвязного списка
  */
-public class SimpleArrayList<E> {
+public class SimpleLinkedList<E> {
 
     private int size;
     private Node<E> first;
 
     /**
-     * Метод вставляет в начало списка данные.
+     * Метод вставляет в начало списка данные
      */
     public void add(E data) {
         Node<E> newLink = new Node<>(data);
@@ -19,7 +19,7 @@ public class SimpleArrayList<E> {
     }
 
     /**
-     * Метод удаления первого элемента в списке.
+     * Метод удаления первого элемента в списке
      *
      * @throws NullPointerException если ({@link #first == null})
      */
@@ -31,7 +31,7 @@ public class SimpleArrayList<E> {
     }
 
     /**
-     * Метод получения элемента по индексу.
+     * Метод получения элемента по индексу
      *
      * @throws NullPointerException если ({@link #first == null})
      */
@@ -44,14 +44,14 @@ public class SimpleArrayList<E> {
     }
 
     /**
-     * Метод получения размера коллекции.
+     * Метод получения размера коллекции
      */
     public int getSize() {
         return this.size;
     }
 
     /**
-     * Класс предназначен для хранения данных.
+     * Класс предназначен для хранения данных
      */
     private static class Node<E> {
 
