@@ -13,19 +13,13 @@ public class User {
         this.birthday = birthday;
     }
 
-//    @Override
-//    public int hashCode() {
-//        int result = 1;
-//        result = 31 * result + children;
-//        result = 31 * result + (name == null ? 0 : name.hashCode());
-//        result = 31 * result + (birthday == null ? 0 : birthday.hashCode());
-//        return result;
-//    }
-
-
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = 1;
+        result = 31 * result + children;
+        result = 31 * result + (name == null ? 0 : name.hashCode());
+        result = 31 * result + (birthday == null ? 0 : birthday.hashCode());
+        return result;
     }
 
     @Override
