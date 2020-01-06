@@ -1,9 +1,6 @@
 package ru.job4j.map;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class User {
     String name;
@@ -16,13 +13,33 @@ public class User {
         this.birthday = birthday;
     }
 
+//    @Override
+//    public int hashCode() {
+//        int result = 1;
+//        result = 31 * result + children;
+//        result = 31 * result + (name == null ? 0 : name.hashCode());
+//        result = 31 * result + (birthday == null ? 0 : birthday.hashCode());
+//        return result;
+//    }
+
+
     @Override
     public int hashCode() {
-        int result = 1;
-        result = 31 * result + children;
-        result = 31 * result + (name == null ? 0 : name.hashCode());
-        result = 31 * result + (birthday == null ? 0 : birthday.hashCode());
-        return result;
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return children == user.children
+                && Objects.equals(name, user.name)
+                && Objects.equals(birthday, user.birthday);
     }
 
     public static void main(String[] args) {
@@ -37,6 +54,8 @@ public class User {
         };
         System.out.println("user1.hashCode(): " + user1.hashCode());
         System.out.println("user2.hashCode(): " + user2.hashCode());
+        System.out.println("user1.equals(user2): " + user1.equals(user2));
+        System.out.println("user2.equals(user1): " + user2.equals(user1));
         System.out.println(hashMap);
     }
 }
