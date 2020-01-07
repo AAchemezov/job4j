@@ -20,10 +20,11 @@ public class SimpleLinkedList<E> {
 
     /**
      * Метод удаления первого элемента в списке
-     *
-     * @throws NullPointerException если ({@link #first == null})
      */
     public E delete() {
+        if (first == null) {
+            return null;
+        }
         E data = first.data;
         first = first.next;
         size--;
@@ -32,10 +33,11 @@ public class SimpleLinkedList<E> {
 
     /**
      * Метод получения элемента по индексу
-     *
-     * @throws NullPointerException если ({@link #first == null})
      */
     public E get(int index) {
+        if (index < 0 || index >= size) {
+            return null;
+        }
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
             result = result.next;

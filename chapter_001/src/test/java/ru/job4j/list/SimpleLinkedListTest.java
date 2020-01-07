@@ -3,6 +3,7 @@ package ru.job4j.list;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -39,13 +40,19 @@ public class SimpleLinkedListTest {
         assertThat(list.getSize(), is(0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetFromEmptyList() {
-        emptyList.get(0);
+        assertThat(emptyList.get(0), equalTo(null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
+    public void testGetIfIndexOutOfRange() {
+        assertThat(list.get(10), equalTo(null));
+        assertThat(list.get(-10), equalTo(null));
+    }
+
+    @Test
     public void testDeleteFromEmptyList() {
-        emptyList.delete();
+        assertThat(emptyList.delete(), equalTo(null));
     }
 }
