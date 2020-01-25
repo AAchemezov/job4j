@@ -113,4 +113,23 @@ public class SimpleTreeTest {
         iteratorTree.next();
         iteratorTree.next();
     }
+
+    @Test
+    public void testBinary() {
+        simpleTree = new SimpleTree<>(1);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(1, 2);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(1, 3);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(2, 4);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(2, 5);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(5, 6);
+        simpleTree.add(5, 7);
+        assertThat(simpleTree.isBinary(), is(true));
+        simpleTree.add(5, 8);
+        assertThat(simpleTree.isBinary(), is(false));
+    }
 }
