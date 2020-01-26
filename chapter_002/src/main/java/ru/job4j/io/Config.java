@@ -6,14 +6,32 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * Загружает конфигурацию из файла и ппредоставляет доступ к ней.
+ * Конфигурация представляется в виде пары 'ключ=значение'.
+ */
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
 
+    /**
+     * Конструктор
+     *
+     * @param path путь до файла конфигурации
+     */
     public Config(final String path) {
         this.path = path;
     }
 
+    /**
+     * Выполняет загрузку конфигурации из файла, путь до которого передан в конструкторе. Выполняет маппинг строк файла.
+     * Символ '#' определяет комментарий до конца строки.
+     * Прервый символ '=' является разделителем имени ключа и значения конфигурации.
+     * Допускаются: 'ключ=', ключ=#комментарий',
+     * [пробельные символы]ключ[пробельные символы]=[пробельные символы]значение[пробельные символы],
+     * Не учитываются: '=Значение'.
+     * ключ==значение=> {ключ}{=значение}.
+     */
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             while (read.ready()) {
@@ -27,7 +45,12 @@ public class Config {
         }
     }
 
-
+    /**
+     * Возвращение значения конфигурации по ключу.
+     *
+     * @param key ключ
+     * @return значение
+     */
     public String value(String key) {
         return values.get(key);
     }

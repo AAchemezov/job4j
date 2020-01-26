@@ -24,6 +24,7 @@ public class ConfigTest {
         assertThat(config.value("i_key"), is("i_value"));
         assertThat(config.value("i key"), is("i value"));
         assertThat(config.value("next"), is("========work"));
+        assertThat(config.value("email"), is(""));
     }
 
     @Test
