@@ -63,6 +63,27 @@ public class SimpleHashMap<K, V> implements IHashMap<K, V>, Iterable<SimpleHashM
     }
 
     /**
+     * Проверяет, что карта пуста
+     */
+    public boolean isEmpty() {
+        return getSize() == 0;
+    }
+
+    /**
+     * возвращает число записей в карте
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * Возвращает ёмкость карты
+     */
+    int getCapacity() {
+        return map.length;
+    }
+
+    /**
      * Возврашает новую хеш-таблицу с элементами старой. Некоторые данные могут быть утеряны при перехешировании.
      *
      * @param mapOld  старый массив
