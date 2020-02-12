@@ -38,28 +38,28 @@ public class SearchTest {
 
         new ArrayList<File>() {
             {
+//.txt
                 add(new File(rootDir + "/1.txt"));
-                add(new File(rootDir + "/folder1/sos.abs"));
-                add(new File(rootDir + "/folder1/.sos.abs.1"));
-                add(new File(rootDir + "/folder1/ txt.abs"));
-                add(new File(rootDir + "/folder1/1   .1.abs"));
                 add(new File(rootDir + "/folder1/folder1/text.txt"));
-                add(new File(rootDir + "/folder1/folder1/abs"));
-                add(new File(rootDir + "/folder1/folder1/sos"));
-                add(new File(rootDir + "/folder1/folder1/txt"));
-                add(new File(rootDir + "/folder1/folder2/1"));
                 add(new File(rootDir + "/folder2/.....txt"));
-                add(new File(rootDir + "/folder2/folder.lnk"));
-                add(new File(rootDir + "/folder2/folder3/_@#$@%%$^$&%^%^&.sos"));
-                add(new File(rootDir + "/folder2/folder3/1.sos"));
+//.tx
+                add(new File(rootDir + "/folder2/1   .1.tx"));
+                add(new File(rootDir + "/folder2/folder3/!@#$%^&()_+=-,.;'№`~.tx"));
+//.
+                add(new File(rootDir + "/txt"));
+                add(new File(rootDir + "/folder2/folder3/ tx"));
+                add(new File(rootDir + "/folder1/lnk"));
+                add(new File(rootDir + "/folder1/folder2/1"));
+//.lnk
+                add(new File(rootDir + "/folder1/folder.lnk"));
                 add(new File(rootDir + "/folder2/folder3/folder4/fold.lnk"));
-
+//.1
+                add(new File(rootDir + "/folder1/.tx.abs.1"));
             }
         }.forEach(f -> {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println(f.getAbsolutePath());
                 e.printStackTrace();
             }
         });
@@ -74,17 +74,17 @@ public class SearchTest {
     }
 
     @Test
-    public void whenSearchSos() {
-        List<String> fileExtensions = List.of(".sos");
+    public void whenSearchTx() {
+        List<String> fileExtensions = List.of(".tx");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[1.sos, _@#$@%%$^$&%^%^&.sos]"));
+        assertThat(files, is("[!@#$%^&()_+=-,.;'№`~.tx, 1   .1.tx]"));
     }
 
     @Test
     public void whenSearchEmpty() {
-        List<String> fileExtensions = List.of("");
+        List<String> fileExtensions = List.of(".");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[1, abs, sos, txt]"));
+        assertThat(files, is("[ tx, 1, lnk, txt]"));
     }
 
     @Test
@@ -98,35 +98,28 @@ public class SearchTest {
     public void whenSearchOne() {
         List<String> fileExtensions = List.of(".1");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[.sos.abs.1]"));
+        assertThat(files, is("[.tx.abs.1]"));
     }
 
     @Test
     public void whenSearchOneAndEmpty() {
-        List<String> fileExtensions = List.of(".1", "");
+        List<String> fileExtensions = List.of(".1", ".");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[.sos.abs.1, 1, abs, sos, txt]"));
-    }
-
-    @Test
-    public void whenSearchAbs() {
-        List<String> fileExtensions = List.of(".abs");
-        String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[ txt.abs, 1   .1.abs, sos.abs]"));
+        assertThat(files, is("[ tx, .tx.abs.1, 1, lnk, txt]"));
     }
 
     @Test
     public void whenSearchNotValid() {
-        List<String> fileExtensions = List.of("abs", "tx", ".txt ", "1.", ".", "testFileDir", "folder1", " ");
+        List<String> fileExtensions = List.of("abs", "tx", "txt ", "1.", "testFileDir", "folder1", "");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
         assertThat(files, is("[]"));
     }
 
     @Test
     public void whenSearchNotValidAndOneAndEmpty() {
-        List<String> fileExtensions = List.of(".1", "abs", "tx", ".txt ", "1.", ".", "testFileDir", "folder1", " ", "");
+        List<String> fileExtensions = List.of(".1", "abs", "tx", ".txt ", "1.", ".", "testFileDir", "folder1", " ");
         String files = getNamesFileList(search.files(rootDir, fileExtensions));
-        assertThat(files, is("[.sos.abs.1, 1, abs, sos, txt]"));
+        assertThat(files, is("[ tx, .tx.abs.1, 1, lnk, txt]"));
     }
 
     @Test
