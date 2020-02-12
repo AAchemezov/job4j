@@ -34,27 +34,27 @@ public class Analyze {
      *               15:10:30;23:12:32
      */
     public void unavailable(String source, String target) {
-        try {
-            BufferedReader read = new BufferedReader(new FileReader(source));
-            PrintWriter out = new PrintWriter(new FileOutputStream(target));
-            String start = null;
-            while (read.ready()) {
-                String[] typeDate = read.readLine().split(" ");
-                if (start == null) {
-                    if (SERVER_LOST.contains(typeDate[0])) {
-                        start = typeDate[1];
-                    }
-                } else {
-                    if (SERVER_FOUND.contains(typeDate[0])) {
-                        out.println(start + ";" + typeDate[1]);
-                        start = null;
+
+        try (BufferedReader read = new BufferedReader(new FileReader(source))) {
+            try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+                String start = null;
+                while (read.ready()) {
+                    String[] typeDate = read.readLine().split(" ");
+                    if (start == null) {
+                        if (SERVER_LOST.contains(typeDate[0])) {
+                            start = typeDate[1];
+                        }
+                    } else {
+                        if (SERVER_FOUND.contains(typeDate[0])) {
+                            out.println(start + ";" + typeDate[1]);
+                            start = null;
+                        }
                     }
                 }
+                if (start != null) {
+                    out.println(start + ";");
+                }
             }
-            if (start != null) {
-                out.println(start + ";");
-            }
-            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
