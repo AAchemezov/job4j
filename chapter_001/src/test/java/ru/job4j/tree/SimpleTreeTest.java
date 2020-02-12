@@ -17,23 +17,28 @@ import static org.hamcrest.Matchers.is;
  */
 public class SimpleTreeTest {
     private Iterator<Integer> iteratorTree;
-    private SimpleTree<Integer> simpleTree;
+    private SimpleTree<Integer> emptyTree;
+    private SimpleTree<Integer> tree;
 
     @Before
     public void setUp() {
-        simpleTree = new SimpleTree<>(1);
-        simpleTree.add(1, 2);
-        simpleTree.add(1, 3);
-        simpleTree.add(1, 4);
-        simpleTree.add(4, 5);
-        simpleTree.add(5, 6);
-        iteratorTree = simpleTree.iterator();
+        tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        iteratorTree = tree.iterator();
     }
 
     @Test
     public void when6ElFindLastThen6() {
+        emptyTree = new SimpleTree<>(1);
+        emptyTree.add(1, 2);
+        emptyTree.add(1, 3);
+        emptyTree.add(1, 4);
+        emptyTree.add(4, 5);
+        emptyTree.add(5, 6);
         assertThat(
-                simpleTree.findBy(6).isPresent(),
+                emptyTree.findBy(6).isPresent(),
                 is(true)
         );
     }
@@ -41,58 +46,44 @@ public class SimpleTreeTest {
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
         assertThat(
-                simpleTree.findBy(7).isPresent(),
+                tree.findBy(7).isPresent(),
                 is(false)
         );
     }
 
     @Test
     public void whenAddNotUniqueValue() {
-        assertThat(simpleTree.add(1, 2), is(false));
-        assertThat(simpleTree.add(1, 3), is(false));
-        assertThat(simpleTree.add(1, 4), is(false));
-        assertThat(simpleTree.add(4, 5), is(false));
-        assertThat(simpleTree.add(5, 6), is(false));
-        assertThat(simpleTree.add(1, 1), is(false));
-        assertThat(simpleTree.add(6, 8), is(true));
+        assertThat(tree.add(1, 2), is(false));
     }
 
     @Test
     public void basicFunctionalityIteratorTest() {
-        for (int i = 0; i < 20; i++) {
-            assertThat(iteratorTree.hasNext(), is(true));
-        }
+        assertThat(iteratorTree.hasNext(), is(true));
         assertThat(iteratorTree.next(), is(1));
         assertThat(iteratorTree.next(), is(2));
         assertThat(iteratorTree.next(), is(3));
-        assertThat(iteratorTree.next(), is(4));
-        assertThat(iteratorTree.next(), is(5));
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             assertThat(iteratorTree.hasNext(), is(true));
         }
-        assertThat(iteratorTree.next(), is(6));
-        for (int i = 0; i < 20; i++) {
-            assertThat(iteratorTree.hasNext(), is(false));
-        }
+        assertThat(iteratorTree.next(), is(4));
+        assertThat(iteratorTree.hasNext(), is(false));
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void testIteratorConcurrentModificationExceptionOnHasNext() {
-        iteratorTree.hasNext();
-        assertThat(simpleTree.add(4, 10), is(true));
+        assertThat(tree.add(4, 5), is(true));
         iteratorTree.hasNext();
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void testIteratorConcurrentModificationExceptionOnNext() {
-        iteratorTree.next();
-        assertThat(simpleTree.add(4, 10), is(true));
+        assertThat(tree.add(4, 5), is(true));
         iteratorTree.next();
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void testIteratorConcurrentModificationExceptionOnForEach() {
-        assertThat(simpleTree.add(4, 10), is(true));
+        assertThat(tree.add(4, 5), is(true));
         iteratorTree.forEachRemaining((o) -> {
         });
     }
@@ -105,31 +96,18 @@ public class SimpleTreeTest {
 
     @Test(expected = NoSuchElementException.class)
     public void testIteratorNoSuchElementExceptionOnNext() {
-        iteratorTree.next();
-        iteratorTree.next();
-        iteratorTree.next();
-        iteratorTree.next();
-        iteratorTree.next();
-        iteratorTree.next();
-        iteratorTree.next();
+        emptyTree = new SimpleTree<>(1);
+        emptyTree.add(1, 2);
+        Iterator<Integer> iterator = emptyTree.iterator();
+        iterator.next();
+        iterator.next();
+        iterator.next();
     }
 
     @Test
     public void testBinary() {
-        simpleTree = new SimpleTree<>(1);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(1, 2);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(1, 3);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(2, 4);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(2, 5);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(5, 6);
-        simpleTree.add(5, 7);
-        assertThat(simpleTree.isBinary(), is(true));
-        simpleTree.add(5, 8);
-        assertThat(simpleTree.isBinary(), is(false));
+        assertThat(tree.isBinary(), is(true));
+        tree.add(1, 5);
+        assertThat(tree.isBinary(), is(false));
     }
 }
