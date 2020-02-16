@@ -1,6 +1,7 @@
 package ru.job4j.io.args;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 /**
  * Класс-хелпер для работы с {@link AbstractArgs.Argument}
@@ -29,7 +30,7 @@ public class ArgumentUtils {
             if (!validateDirectory(s.substring(0, i))) {
                 return false;
             }
-            s = s.substring(i, s.length());
+            s = s.substring(i);
         }
         return s.matches("^[^*&%?]+$");
     }
@@ -52,15 +53,32 @@ public class ArgumentUtils {
      * Возвращает простой строковый аргумент
      */
     public static AbstractArgs.Argument<String> getEmptyStringArgument(String s) {
-        return new AbstractArgs.Argument<String>(s).setMapping(s1 -> s1);
+        return new AbstractArgs.Argument<String>(s).setValidating(s1 -> !s.isEmpty()).setMapping(s1 -> s1);
     }
 
     /**
      * Возвращает простой аргумент - флаг
      */
     public static AbstractArgs.Argument<String> getWithoutArgument(String s) {
-        return new AbstractArgs.Argument<String>(s).setValidating(s1 -> "".equals(s1));
+        return new AbstractArgs.Argument<String>(s).setValidating(""::equals).setWithoutStartingValue(true);
     }
 
+    /**
+     * Возвращает строку регулярного выражения по маске
+     *
+     * @param mask маска имени файла, [*] заменяет один или более символов,
+     *             например: Имя*файла, *фай*, Им**файла
+     */
+    public static String getMaskTemplate(String mask) {
+        return "^" + Pattern.quote(mask).replace("*", "\\E.+\\Q") + "$";
+    }
 
+    /**
+     * Возвращает строку регулярного выражения полного совпадения имени.
+     *
+     * @param name имя файла с расширением, например: class.java, .properties
+     */
+    public static String getFullNameTemplate(String name) {
+        return "^" + Pattern.quote(name) + "$";
+    }
 }

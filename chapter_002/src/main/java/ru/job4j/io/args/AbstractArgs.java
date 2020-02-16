@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Поддерживаются возможности подготовки строковых параметров, валидации и маппинга в соответствующие объекты
  * через использование типизированного класса аргумента {@link Argument}.
  */
-abstract class AbstractArgs {
+abstract public class AbstractArgs {
     // Начальные данные
     private final List<String> startData;
     //то, что из начальных данных не было распознано
@@ -93,8 +93,8 @@ abstract class AbstractArgs {
      * агрумент не прошел валидацию функцией валидации;
      * иначе - false
      */
-    protected static boolean isNotValidArgument(Argument argument) {
-        return argument == null || !argument.isValid();
+    protected static boolean isValidArgument(Argument argument) {
+        return argument != null && argument.isValid();
     }
 
     /**
@@ -124,7 +124,7 @@ abstract class AbstractArgs {
      */
     public boolean isAllArgumentsValid() {
         for (Argument argument : getArgumentMap().values()) {
-            if (isNotValidArgument(argument)) {
+            if (!isValidArgument(argument)) {
                 return false;
             }
         }
@@ -137,7 +137,7 @@ abstract class AbstractArgs {
     public ArrayList<String> getInValidArguments() {
         ArrayList<String> arrayList = new ArrayList<>();
         for (Argument argument : getArgumentMap().values()) {
-            if (isNotValidArgument(argument)) {
+            if (!isValidArgument(argument)) {
                 arrayList.add(argument.name);
             }
         }
@@ -186,7 +186,7 @@ abstract class AbstractArgs {
          * @param name имя аргумента
          * @throws IllegalArgumentException если имя == null,или пустое
          */
-        protected Argument(String name) {
+        public Argument(String name) {
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Name must not null and not empty.");
             }
@@ -213,7 +213,7 @@ abstract class AbstractArgs {
          *
          * @return this
          */
-        protected Argument<T> setPreparing(Function<String, String> preparing) {
+        public Argument<T> setPreparing(Function<String, String> preparing) {
             this.preparing = preparing;
             return this;
         }
@@ -223,7 +223,7 @@ abstract class AbstractArgs {
          *
          * @return this
          */
-        protected Argument<T> setValidating(Predicate<String> validating) {
+        public Argument<T> setValidating(Predicate<String> validating) {
             this.validating = validating;
             return this;
         }
@@ -233,7 +233,7 @@ abstract class AbstractArgs {
          *
          * @return this
          */
-        protected Argument<T> setMapping(Function<String, T> mapping) {
+        public Argument<T> setMapping(Function<String, T> mapping) {
             this.mapping = mapping;
             return this;
         }
@@ -274,7 +274,7 @@ abstract class AbstractArgs {
         /**
          * Возвращает имя аргумента
          */
-        String getName() {
+        public String getName() {
             return name;
         }
 

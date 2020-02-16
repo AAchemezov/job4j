@@ -86,4 +86,25 @@ public class Search {
         }
     }
 
+    /**
+     * Поиск файлов по соответствию имени файла паттерну.
+     *
+     * @param parent  путь до каталога, с которого нужно осуществлять поиск
+     * @param pattern паттерн поиска
+     * @return найденные файлы
+     */
+    public List<File> files(File parent, Pattern pattern) {
+        final List<File> results = new ArrayList<>();
+        if (parent == null) {
+            return results;
+        }
+        breadthFirstSearch(parent,
+                file -> {
+                    if (pattern.matcher(file.getName()).find()) {
+                        results.add(file);
+                    }
+                });
+        return results;
+    }
+
 }
