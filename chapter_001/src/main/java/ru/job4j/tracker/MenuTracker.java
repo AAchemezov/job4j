@@ -9,13 +9,13 @@ import java.util.function.Consumer;
 
 public class MenuTracker {
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     public ArrayList<UserAction> actions = new ArrayList<>();
 
     private static String pattern = "MM-dd-yyyy hh:mm:ss";
     private static SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
 
-    MenuTracker(Input input, Tracker tracker) {
+    MenuTracker(Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -56,7 +56,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             System.out.println("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки :");
             String description = input.ask("Введите описание заявки :");
@@ -74,7 +74,7 @@ public class MenuTracker {
             super(key, note);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             if (tracker.findAll().isEmpty()) {
                 System.out.println("Список заявок пуст");
             } else {
@@ -96,7 +96,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             List<Item> items = tracker.findAll();
             System.out.println("Список всех заявок:" + items.size());
             for (Item item : items) {
@@ -111,7 +111,7 @@ public class MenuTracker {
             super(key, note);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             if (tracker.findAll().isEmpty()) {
                 System.out.println("Список заявок пуст");
             } else {
@@ -135,7 +135,7 @@ public class MenuTracker {
             super(key, note);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             if (tracker.findAll().isEmpty()) {
                 System.out.println("Список заявок пуст");
             } else {
@@ -161,7 +161,7 @@ public class MenuTracker {
             super(key, note);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
         }
     }
 
@@ -171,7 +171,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             System.out.println("------------ Удаление заявки --------------");
             String question = input.ask("Введите ID удаяемой заявки :");
             Item item = tracker.findById(question);

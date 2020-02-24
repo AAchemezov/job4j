@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Tracker {
+public class Tracker implements ITracker {
 
     private ArrayList<Item> items = new ArrayList<>();
 

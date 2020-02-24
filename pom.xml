@@ -1,5 +1,5 @@
 <project>
-    
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ru.job4j</groupId>
 	<artifactId>junior</artifactId>
@@ -19,7 +19,7 @@
 		<module>chapter_002</module>
 		<module>chapter_003</module>
 	</modules>
-	 
+
 	<build>
 		<plugins>
 			<plugin>
@@ -48,7 +48,7 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>		
+		</plugins>
 	</build>
 
 	<dependencies>
@@ -86,6 +86,13 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.11.1</version>
 		</dependency>
-	</dependencies>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.10</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
