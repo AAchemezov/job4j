@@ -1,17 +1,15 @@
-package ru.job4j.jdbc;
+package ru.job4j.tracker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.job4j.tracker.*;
 
-import java.io.Closeable;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class TrackerSQL implements ITracker, Closeable {
+public class TrackerSQL implements ITracker, AutoCloseable {
 
     private static final Logger LOG = LogManager.getLogger(TrackerSQL.class.getName());
 
@@ -80,6 +78,12 @@ public class TrackerSQL implements ITracker, Closeable {
         return this.connection != null;
     }
 
+    public TrackerSQL(Connection connection) {
+        this.connection = connection;
+    }
+
+    public TrackerSQL() {
+    }
 
     @Override
     public Item add(Item item) {
