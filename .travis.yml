@@ -3,8 +3,6 @@ language: java
 jdk:
   - openjdk11
 
-os: windows
-
 services:
   - postgresql
 
