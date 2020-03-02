@@ -81,17 +81,19 @@ public class Find {
      */
     public static void main(String[] args) {
         FindArgs findArgs = new FindArgs(args);
+
         if (findArgs.isAllArgumentsValid()) {
             List<File> files = new Search().files(findArgs.getDirectory(), Pattern.compile(findArgs.getANameValue()));
             files.forEach(f -> System.out.println(f.getAbsolutePath()));
             saveLog(findArgs.getOutput(), files);
-        } else {
-            System.out.println(getHelp());
-            outLog(TRASH_PARAM, findArgs.getTrashData());
-            outLog(INVALID_PARAM, findArgs.getInValidArguments());
-            if (!findArgs.validateMode()) {
-                outLog(String.format(SELECT_MODE, findArgs.getValidModes()));
-            }
+            return;
+        }
+
+        System.out.println(getHelp());
+        outLog(TRASH_PARAM, findArgs.getTrashData());
+        outLog(INVALID_PARAM, findArgs.getInValidArguments());
+        if (!findArgs.validateMode()) {
+            outLog(String.format(SELECT_MODE, findArgs.getValidModes()));
         }
     }
 }
