@@ -8,7 +8,7 @@ import java.util.List;
 import static ru.job4j.xml.ElementConfiguration.Entry;
 
 public class MainProgram {
-
+    //todo лучше загрузать через classloader
     private static String pathSource = "chapter_003/src/main/resources/source.xml";
     private static String pathTarget = "chapter_003/src/main/resources/target.xml";
     private static String pathSchema = "chapter_003/src/main/resources/schema.xsl";
