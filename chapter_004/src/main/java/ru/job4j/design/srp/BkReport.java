@@ -1,5 +1,6 @@
 package ru.job4j.design.srp;
 
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -15,7 +16,7 @@ public class BkReport extends ReportEngine {
     }
 
     public BkReport(Store store, String format) {
-        this(store, aDouble -> String.format(format, aDouble));
+        this(store, aDouble -> String.format(Locale.ENGLISH, format, aDouble));
     }
 
     public BkReport(Store store, Function<Double, String> mapSalary) {
